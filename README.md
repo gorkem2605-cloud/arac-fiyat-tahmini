@@ -46,12 +46,9 @@ pip install -r requirements.txt
 **Kaggle'a kayıt gerekiyor (ücretsiz):**
 
 1. https://www.kaggle.com adresine git, hesap aç
-2. Şu linke git: https://www.kaggle.com/datasets/alpertemel/turkey-car-market-2020
-3. **Download** butonuna bas → `turkey_car_market.csv` inecek
+2. Şu linke git: https://www.kaggle.com/datasets/oguzarar/turkey-used-car-prices-august-2025
+3. **Download** butonuna bas → `cars.csv` inecek
 4. Bu dosyayı projenin `data/` klasörüne taşı
-
-Alternatif veri seti (daha büyük):
-- https://www.kaggle.com/datasets/omercolakoglu/turkish-market-sales-dataset-with-9000items
 
 ---
 
@@ -66,10 +63,10 @@ python train.py
 ==================================================
   Araç Fiyat Tahmin Modeli - Eğitim
 ==================================================
-📂 Veri yükleniyor: data/turkey_car_market.csv
-   Ham veri: 9,044 satır, 15 kolon
+📂 Veri yükleniyor: data/cars.csv
+   Ham veri: 52.256 satır, 23 kolon
 🔧 Veri temizleniyor...
-   Temiz veri: 8,901 satır
+   Temiz veri: 51.450 satır
 🤖 Model eğitiliyor...
   XGBoost         → R²=0.9120  MAE=45,230 ₺
   RandomForest    → R²=0.8980  MAE=52,100 ₺
@@ -90,20 +87,6 @@ Tarayıcı otomatik açılır → http://localhost:8501
 
 ---
 
-## 🏫 Okulda Kullanım
-
-Her seferinde:
-```bash
-# 1. Sanal ortamı aktif et (kurulum yaptıysan)
-venv\Scripts\activate       # Windows
-source venv/bin/activate    # Mac/Linux
-
-# 2. Çalıştır
-streamlit run app.py
-```
-
-Model zaten `model/` klasöründe olduğu için `train.py`'ı tekrar çalıştırmana gerek yok.
-
 ---
 
 ## 📁 Klasör Yapısı
@@ -113,13 +96,14 @@ arac-fiyat-tahmini/
 ├── app.py              ← Ana uygulama (Streamlit)
 ├── train.py            ← Model eğitim scripti
 ├── requirements.txt    ← Kütüphane listesi
-├── README.md
+├── README.md           ← Proje dokümanı
+├── .gitignore          
 ├── utils/
 │   ├── __init__.py
 │   └── predictor.py    ← Tahmin yardımcı modülü
 ├── data/
-│   └── turkey_car_market.csv   ← (Kaggle'dan indirilecek)
-└── model/              ← (train.py sonrası otomatik oluşur)
+│   └── cars.csv        ← (Kaggle'dan indirilecek)
+└── model/              
     ├── model.pkl
     ├── encoders.pkl
     └── meta.json
@@ -137,18 +121,3 @@ arac-fiyat-tahmini/
 - ✅ İnternet bağlantısı gerekmez (sadece kurulumda)
 
 ---
-
-## 🔧 Sorun Giderme
-
-**`ModuleNotFoundError` hatası:**
-```bash
-pip install -r requirements.txt
-```
-
-**`FileNotFoundError: data/turkey_car_market.csv`:**
-Veri setini `data/` klasörüne koyduğundan emin ol.
-
-**Port meşgul hatası:**
-```bash
-streamlit run app.py --server.port 8502
-```
